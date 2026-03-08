@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira</title>
+</head>
+<body>
+   
+   
+    <h1>Calculadora Financeira</h1>
+    
+    Insira a quantidade de lâmpadas <b>LED</b> que existem no local: <br>
+        <input id="i_lampled"><br><br>
+    
+    Insira a quantidade de lâmpadas INCANDECENTES que existem no local: <br>
+        <input id="i_lampincandecente"><br><br>
+    
+    Insira a potencia das lâmpadas LED: <br>
+        <input id="i_potled"><br><br>
+    
+    Insira a potencia das lâmpadas INCANDECENTES: <br>
+        <input id="i_potincandecente"><br><br>
+
+    Insira o valor do kW/h da sua região: <br>
+        <input id="i_kWh"><br><br>
+
+    Insira o numero de horas que a luz e utilizada: <br> 
+        <input id="i_hrs"><br><br>
+            
+            <button onclick="calcular()">Calcular Gastos com Luz</button>  
+            <button onclick="calcularlumi()">Calcular Gastos com Luz com Lumi</button><br><br>
+                <div id="msg"></div>
+
+</body>
+</html>
+<script>
+   function calcular() {
+    let led = Number(i_lampled.value);
+    let inc = Number(i_lampincandecente.value);
+    let potled = Number(i_potled.value);
+    let potinc = Number(i_potincandecente.value);
+    let kwh = Number(i_kWh.value);
+    let hrs = Number(i_hrs.value);
+    let consumoled = Number((potled * hrs * 25)/1000);
+    let totalled = Number(consumoled * kwh * led);
+    let consumoinc = Number((potinc * hrs * 25)/1000);
+    let totalinc = Number(consumoinc * kwh * inc);
+    let gastototal = Number(totalinc + totalled);
+        msg.innerHTML = `O gasto total mensal com iluminação do seu estabelecimento é de R$ ${gastototal.toFixed(2)}<br><br>`;
+
+   }
+   
+   function calcularlumi() {
+    let led = Number(i_lampled.value);
+    let inc = Number(i_lampincandecente.value);
+    let potled = Number(i_potled.value);
+    let potinc = Number(i_potincandecente.value);
+    let kwh = Number(i_kWh.value);
+    let hrs = Number(i_hrs.value);
+    let consumoled = Number((potled * hrs * 25)/1000);
+    let consumoledlumi = Number((potled * 14 * 25)/1000);
+    let totalled = Number(consumoled * kwh * led);
+    let totalledlumi = Number(consumoledlumi * kwh * led);
+    let consumoinc = Number((potinc * hrs * 25)/1000);
+    let consumoinclumi = Number((potinc * 14 * 25)/1000);
+    let totalinc = Number(consumoinc * kwh * inc);
+    let totalinclumi = Number(consumoinclumi * kwh * inc);
+    let gastolumi = Number(totalinclumi + totalledlumi);
+    let gastototal = Number(totalinc + totalled);
+    let economia = Number(gastototal - gastolumi);
+        msg.innerHTML = `O gasto total mensal com iluminação do seu estabelecimento é de R$ ${gastototal.toFixed(2)}.<br>
+        Ja com a LUMI, o sensor identifica que a luminosidade ideal ocorre em um periodo de 10hrs no dia,                                          
+        então o gasto total mensal é de R$ ${gastolumi.toFixed(2)}, ou seja,
+        a economia gerada é de R$ ${economia.toFixed(2)}.`;
+   }
+   
+
+</script>
