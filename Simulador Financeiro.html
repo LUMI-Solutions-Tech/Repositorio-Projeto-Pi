@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Financeiro</title>
+</head>
+<body>
+    <h2>Quantidade de lâmpadas Incandescentes (60W):</h2>
+    <input id="ipt_inc" type="text"> <br>
+    <h2>Quantidade de lâmpadas Fluorescentes (15W):</h2>
+    <input id="ipt_flu" type="text"> <br>
+     <h2>Quantidade de lâmpadas Halógenas (42W):</h2>
+    <input id="ipt_halo" type="text"> <br>
+     <h2>Quantidade de lâmpadas LED (9W):</h2>
+    <input id="ipt_LED" type="text"> <br>
+     <h2>Quantidade de horas ligadas por dia:</h2>
+    <input id="ipt_horas" type="text"> <br>
+     <h2>Quantidade de dias no mês:</h2>
+    <input id="ipt_dias" type="text"> <br>
+     <h2>Preço do kWh:</h2>
+    <input id="ipt_kwh" type="text"> <br>
+    <button onclick = 'calcular()'>Cálculo</button>
+    <div id="div_msg"></div>
+</body>
+</html>
+<script>
+    function calcular() {
+        let inc = Number(ipt_inc.value);
+        let fluor = Number(ipt_flu.value);
+        let halo = Number(ipt_halo.value);
+        let led = Number(ipt_LED.value);
+
+        let horas = Number(ipt_horas.value);
+        let dias = Number(ipt_dias.value);
+        let preco = Number(ipt_kwh.value);
+
+        let pot_inc = 60;
+        let pot_fluor = 15;
+        let pot_halo = 42;
+        let pot_led = 9;
+
+        let total_lampadas = inc + fluor + halo + led;
+
+        let consumo_inc = (pot_inc * inc * horas * dias) / 1000;
+        let consumo_fluor = (pot_fluor * fluor * horas * dias) / 1000;
+        let consumo_halo = (pot_halo * halo * horas * dias) / 1000;
+        let consumo_led = (pot_led * led * horas * dias) / 1000;
+
+        let consumo_total = consumo_inc + consumo_fluor + consumo_halo + consumo_led;
+        let consumo_anual = consumo_total * 12;
+
+        let custo = consumo_total * preco;
+        let custo_anual = custo * 12;
+        let eco_mes_desc = custo * 0.25;
+        let eco_mes = custo - eco_mes_desc;
+        let eco_anual_dec = custo_anual * 0.25;
+        let eco_anual = custo_anual - eco_anual_dec;
+
+    div_msg.innerHTML = `Você tem um gasto de R$${custo.toFixed(2)} por mês, e um custo de R$${custo_anual.toFixed(2)} por ano.<br><br>
+    Com a nossa empresa você terá um custo de R$${eco_mes.toFixed(2)} por mês, e um custo de R$${eco_anual.toFixed(2)} por ano.<br><br>
+    Com nossa ajuda você obteve um desconto de R$${eco_mes_desc.toFixed(2)} por mês e um desconto de R$${eco_anual_dec.toFixed(2)} por ano!!!`
+    }
+</script>
