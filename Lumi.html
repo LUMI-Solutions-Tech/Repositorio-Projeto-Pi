@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Cálculo Negócios</title>
+</head>
+
+<body>
+      <h2>Cálculo Conta</h2>
+      Parceiro da Lumi?: <input id="ipt_par"> <br>
+      potência da lâmpada(w): <input id="ipt_pot"> <br>
+      Horas de Uso: <input id="ipt_uso"> <br>
+      dias: <input id="ipt_dias"> <br>
+      <button onclick="Gasto()">Calcular Gasto</button>
+
+      <div id="div_msg"></div>
+</body>
+
+</html>
+<script>
+      function Gasto() {
+            let Dias = Number(ipt_dias.value);
+            let horas = Number(ipt_uso.value);
+            let potencia = Number(ipt_pot.value);
+            let Kwh = Number(((potencia * horas / 1000) * Dias));
+
+            if (ipt_par.value == 'sim') { div_msg.innerHTML = `O seu gasto é R$${Kwh * 0.75} <br>`; }
+            else { div_msg.innerHTML = `O seu gasto é R$${Kwh}<br>`; }
+      }
+</script>
