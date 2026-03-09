@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprint 1 - HTML - Felipe</title>
+</head>
+<body>
+
+    <h2>Simulador Financeiro</h2>
+    Inserir nome da empresa: 
+    <input type="text" name="" id="empresa_ipt"> <br> <br>
+    Inserir quantidade de lampadas led no local:
+    <input type="text" name="" id="led_ipt"> <br>
+    Inserir horas utilizadas diariamente pela lampada led
+    <input type="text" name="" id="horasled_ipt"> <br> <br>
+    Inserir quantidade de lampadas incandecente no local:
+    <input type="text" name="" id="inc_ipt"> <br>
+    Inserir horas utilizadas diariamente pela lampada incandecente
+    <input type="text" name="" id="horasinc_ipt"> <br> <br>
+    Utiliza Lumi sensores? (sim ou nao)
+    <input type="text" name="" id="lumi_ipt"> <br> <br>
+    <button onclick="simular()">Simular</button> <br> <br>
+    <div id="div_msg"></div>
+</body>
+</html>
+
+<script>
+
+let mes = 0
+function simular() {
+    mes = mes + 1
+let empresa = empresa_ipt.value
+let led = Number(led_ipt.value)
+let horasled = Number(horasled_ipt.value)
+let inc = Number(inc_ipt.value)
+let horasinc = Number(horasinc_ipt.value)
+let lumi = lumi_ipt.value
+let total = Number(led * horasled * 0.007 * 30) + Number(inc * horasinc * 0.05 * 30)
+let totalmensal = 0
+if (lumi == 'sim')
+{totalmensal = total * 0.75
+div_msg.innerHTML = `Sua empresa ${empresa} teve gasto total com lampadas de R$${totalmensal} este ${mes}° mes. Sempre é bom economizar com a Lumi!`}
+else
+{totalmensal = total
+div_msg.innerHTML = `Sua empresa ${empresa} teve gasto total com lampadas de R$${totalmensal} este ${mes}° mes. Venha conhecer a Lumi para economizar ainda mais!`}
+
+}
+
+</script>
