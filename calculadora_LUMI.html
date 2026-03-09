@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Calculadora Lumi</title>
+</head>
+
+<body>
+
+<h2>Consumo de iluminação</h2>
+
+<h3>Quantidade de lâmpadas de Vapor Metálico (250W)
+<input id="ipt_vapor"></h3>
+
+<h3>Quantidade de lâmpadas Fluorescentes (15W)
+<input id="ipt_fluor"></h3>
+
+<h3>Quantidade de lâmpadas Halógenas (42W)
+<input id="ipt_halo"></h3>
+
+<h3>Quantidade de lâmpadas LED (9W)
+<input id="ipt_led"></h3>
+
+<h3>Horas ligadas por dia
+<input id="ipt_horas"></h3>
+
+<h3>Dias no mês
+<input id="ipt_dias"></h3>
+
+<h3>Preço do kWh
+<input id="ipt_preco"></h3>
+
+<button onclick="calcular()">Calcular</button>
+
+<div id="div_msg"></div>
+</body>
+</html>
+
+<script>
+
+let soma = 0
+let vl_acu = 0
+let vl_acu_anual = 0
+
+function calcular(){
+
+soma = soma + 1
+
+let vapor = Number(ipt_vapor.value);
+let fluor = Number(ipt_fluor.value);
+let halo = Number(ipt_halo.value);
+let led = Number(ipt_led.value);
+
+let horas = Number(ipt_horas.value);
+let dias = Number(ipt_dias.value);
+let preco = Number(ipt_preco.value);
+
+let pot_vapor = 250;
+let pot_fluor = 15;
+let pot_halo = 42;
+let pot_led = 9;
+
+let total_lampadas = vapor + fluor + halo + led;
+
+let consumo_vapor = (pot_vapor * vapor * horas * dias) / 1000;
+let consumo_fluor = (pot_fluor * fluor * horas * dias) / 1000;
+let consumo_halo = (pot_halo * halo * horas * dias) / 1000;
+let consumo_led = (pot_led * led * horas * dias) / 1000;
+
+let consumo_total = consumo_vapor + consumo_fluor + consumo_halo + consumo_led;
+
+let consumo_anual = consumo_total * 12;
+
+let custo = consumo_total * preco;
+let custo_anual = custo * 12;
+
+let eco_mes_desc = custo * 0.25;
+let eco_mes = custo - eco_mes_desc;
+
+let eco_anual_dec = custo_anual * 0.25;
+let eco_anual = custo_anual - eco_anual_dec;
+
+vl_acu = vl_acu + custo;
+vl_acu_anual = vl_acu_anual + custo_anual;
+
+div_msg.innerHTML += `
+<h3>${soma} cômodo<br></h3>
+
+Total de lâmpadas: ${total_lampadas}<br><br>
+
+Consumo Vapor Metálico: ${consumo_vapor.toFixed(2)} kWh<br>
+Consumo Fluorescente: ${consumo_fluor.toFixed(2)} kWh<br>
+Consumo Halógena: ${consumo_halo.toFixed(2)} kWh<br>
+Consumo LED: ${consumo_led.toFixed(2)} kWh<br><br>
+
+Consumo mensal: ${consumo_total.toFixed(2)} kWh<br>
+Consumo anual: ${consumo_anual.toFixed(2)} kWh<br>
+Custo mensal: R$ ${custo.toFixed(2)}<br>
+Custo anual: R$ ${custo_anual.toFixed(2)}<br>
+
+<h1>Com a Lumi você vai economizar</h1>
+<h3>${eco_mes.toFixed(2)} R$ por mês</h3>
+<h3>${eco_anual.toFixed(2)} R$ por ano</h3>
+
+<h1>Valor acumulado</h1>
+<h3>${vl_acu.toFixed(2)} R$ por mês</h3>
+<h3>${vl_acu_anual.toFixed(2)} R$ por ano</h3>
+`;
+
+}
+
+</script>
