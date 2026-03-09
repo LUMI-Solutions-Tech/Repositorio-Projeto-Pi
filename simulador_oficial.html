@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=], initial-scale=1.0">
+    <title>Simulador Financeiro</title>
+</head>
+<body>
+
+    <h1>Calculo de economia LUMI</h1>
+    NOME DA EMPRESA <br>
+    <input id="input_nome"> <br>
+    POTENCIA DA LAMPADA <br>
+    <input id="input_potencia"> <br>
+    QUANTIDADE DE LAMPADAS <br>
+    <input id="input_quantidade"> <br>
+    QUANTIDADE DE HORAS QUE O SENSOR CAPTOU LUMINOSIDADE BOA (=>600)
+    <input id="input_horas"> <br>
+    <button onclick="mostrar()">Simular economia</button> <br>
+    <div id="div"></div> <br>
+   
+</body>
+</html>
+
+<script>
+
+    function mostrar(){
+        let gasto = (Number(input_quantidade.value)* Number(input_potencia.value) * (24 - Number(input_horas.value)))/ 1000;
+        let kwh = (Number(input_quantidade.value)* Number(input_potencia.value) * 24)/ 1000;
+        let tarifa1 = (kwh * 0.80);
+        let tarifa2 = (gasto * 0.80);
+        let economia = tarifa1 - tarifa2;
+
+        div.innerHTML += `<h4>Dia 1 com as luzes acesas 24 horas por dia</h4> 
+        O gasto da empresa ${input_nome.value} foi de R$${tarifa1.toFixed(2)} <br>`;
+
+        div.innerHTML += `<h4>Dia 2 com as luzes acesas apenas com as horas de luminosidade baixa</h4> 
+        O gasto da empresa ${input_nome.value} foi de R$${tarifa2.toFixed(2)} <br>`;
+
+        div.innerHTML += `<h4>A economia foi de: </h4>
+         R$${economia.toFixed(2)} em um dia <br>
+         R$${economia.toFixed(2)* 20} em um mês`;
+
+    }
+
+</script>
